@@ -852,19 +852,6 @@ section h2{
 
 }
 
-.social{
-
-    margin-top:50px;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:25px;
-
-    flex-wrap:wrap;
-
-}
 
 .social{
     display:flex;
@@ -1185,4 +1172,17 @@ section h2{
 
 .scroll-top:hover{
     transform:translateY(-5px);
+}
+@media (max-width:768px){
+
+    .social{
+        gap:12px;
+    }
+
+    .social-btn{
+        width:48%;
+        justify-content:center;
+        box-sizing:border-box;
+    }
+
 }
