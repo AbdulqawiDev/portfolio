@@ -1092,18 +1092,22 @@ section h2{
 }
 
 .social{
-
-    gap:18px;
-
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 50px;
 }
 
-.social a{
+.social-btn{
 
-    width:60px;
+    width:100%;
+    max-width:320px;
 
-    height:60px;
+    justify-content:center;
 
-    font-size:24px;
+    padding:15px 20px;
 
 }
 
