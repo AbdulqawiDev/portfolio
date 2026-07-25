@@ -117,7 +117,6 @@ background:linear-gradient(90deg,#3b82f6,#06b6d4,#22c55e);
 -webkit-text-fill-color:transparent;
 
 }
-
 nav ul{
 
 display:flex;
@@ -389,27 +388,6 @@ position:relative;
 
 }
 
-section h2::after{
-
-content:"";
-
-position:absolute;
-
-bottom:-12px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-width:90px;
-
-height:4px;
-
-background:#06b6d4;
-
-border-radius:50px;
-
-}
 
 /*==================================================
                 ABOUT SECTION
@@ -899,9 +877,6 @@ section h2{
     background:#0077B5;
 }
 
-.cv{
-    background:#dbd5d583;
-}
 
 
 
@@ -1031,21 +1006,7 @@ nav ul{
 
 @media(max-width:768px){
 
-nav{
 
-    flex-direction:column;
-
-    gap:15px;
-
-}
-
-nav ul{
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-}
 
 .hero-left h1{
 
@@ -1143,13 +1104,12 @@ section h2{
 }
 
 }
-.cv{
-    background:#e63946;
+.cv{ 
+       background:#e63946;
 }
 
-.cv:hover{
-    background:#c1121f;
-}
+
+
 .scroll-top{
     position:fixed;
     bottom:30px;
@@ -1177,17 +1137,108 @@ section h2{
 .scroll-top:hover{
     transform:translateY(-5px);
 }
-@media (max-width:768px){
+/* ==========================
+   MOBILE NAVBAR
+========================== */
 
-    .social{
-        gap:12px;
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    color:#fff;
+    cursor:pointer;
+}
+
+
+/* ==========================
+   MOBILE ONLY
+========================== */
+
+@media(max-width:768px){
+
+    nav{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+        padding:15px 20px;
     }
 
+
+    .menu-toggle{
+        display:block;
+    }
+
+
+  .nav-links{
+
+    display:none;
+
+    position:absolute;
+    top:85px;
+    right:20px;
+    width:220px;
+
+    flex-direction:column;
+    gap:20px;
+
+    padding:25px;
+
+    background:rgba(5,8,22,.96);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(-15px);
+
+    transition:.35s;
+
+}
+
+
+    .nav-links.active{
+        display: flex;
+
+
+        opacity:1;
+
+        visibility:visible;
+
+        transform:translateY(0);
+
+    }
+
+
+    .nav-links li{
+
+        text-align:center;
+
+    }
+
+
+    .social{
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:12px;
+
+    }
+
+
     .social-btn{
-        width:48%;
+
+        width:100%;
+
+        max-width:320px;
+
         justify-content:center;
-        box-sizing:border-box;
+
     }
 
 }
-/* test */

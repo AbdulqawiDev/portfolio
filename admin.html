@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة التحكم | عبدالقوي السالمي</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;}
+body{
+    background:#050816;
+    color:#fff;
+    min-height:100vh;
+}
+.login-box{
+    max-width:400px;
+    margin:100px auto;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    padding:40px;
+    backdrop-filter:blur(20px);
+}
+.login-box h2{
+    text-align:center;
+    margin-bottom:30px;
+    background:linear-gradient(90deg,#3b82f6,#06b6d4,#22c55e);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+input, textarea{
+    width:100%;
+    padding:14px;
+    margin-bottom:15px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:10px;
+    color:#fff;
+    font-family:'Cairo',sans-serif;
+    font-size:15px;
+}
+textarea{resize:vertical;min-height:80px;}
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    color:#fff;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+button:hover{transform:translateY(-3px);box-shadow:0 10px 25px #06b6d455;}
+.error-msg{
+    color:#ef4444;
+    text-align:center;
+    margin-top:10px;
+    font-size:14px;
+}
+
+/* Dashboard */
+.dashboard{display:none;}
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 5%;
+    background:rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+.topbar h1{font-size:20px;}
+.logout-btn{
+    width:auto;
+    padding:10px 20px;
+    background:#ef4444;
+    font-size:14px;
+}
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px;
+}
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+}
+.tab-btn{
+    width:auto;
+    padding:12px 25px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+}
+.tab-btn.active{
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+}
+.panel{display:none;}
+.panel.active{display:block;}
+
+.form-card{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:35px;
+}
+.form-card h3{margin-bottom:20px;color:#06b6d4;}
+.form-card .submit-btn{margin-top:10px;}
+.progress-wrap{
+    display:none;
+    height:8px;
+    background:#1e293b;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#3b82f6,#06b6d4);
+    transition:.2s;
+}
+
+.list-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:20px;
+}
+.item-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    overflow:hidden;
+}
+.item-card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+}
+.item-card .info{padding:15px;}
+.item-card h4{margin-bottom:8px;font-size:16px;}
+.item-card p{font-size:13px;color:#b8b8b8;margin-bottom:12px;line-height:1.6;}
+.item-actions{display:flex;gap:10px;}
+.item-actions button{
+    padding:8px 12px;
+    font-size:13px;
+}
+.btn-edit{background:#f59e0b;}
+.btn-delete{background:#ef4444;}
+
+.status-msg{
+    text-align:center;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:14px;
+    display:none;
+}
+.status-msg.success{background:#22c55e33;color:#22c55e;display:block;}
+.status-msg.error{background:#ef444433;color:#ef4444;display:block;}
+
+@media(max-width:600px){
+    .login-box{margin:60px 20px;padding:25px;}
+    .topbar{flex-direction:column;gap:15px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-box" id="loginBox">
+    <h2><i class="fas fa-lock"></i> تسجيل الدخول</h2>
+    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+    <input type="password" id="loginPass" placeholder="كلمة المرور">
+    <button id="loginBtn">دخول</button>
+    <p class="error-msg" id="loginError"></p>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+    <div class="topbar">
+        <h1><i class="fas fa-gauge"></i> لوحة التحكم</h1>
+        <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="projects">المشاريع</button>
+            <button class="tab-btn" data-tab="certificates">الشهادات</button>
+        </div>
+
+        <!-- PROJECTS PANEL -->
+        <div class="panel active" id="projects-panel">
+            <div class="form-card">
+                <h3 id="projFormTitle"><i class="fas fa-plus"></i> إضافة مشروع جديد</h3>
+                <p class="status-msg" id="projStatus"></p>
+                <input type="text" id="projTitle" placeholder="عنوان المشروع">
+                <textarea id="projDesc" placeholder="وصف المشروع"></textarea>
+                <input type="text" id="projLink" placeholder="رابط المشروع (GitHub أو معاينة)">
+                <input type="file" id="projImage" accept="image/*">
+                <div class="progress-wrap" id="projProgressWrap">
+                    <div class="progress-bar" id="projProgressBar"></div>
+                </div>
+                <input type="hidden" id="projEditId">
+                <button class="submit-btn" id="projSubmitBtn">إضافة المشروع</button>
+            </div>
+            <div class="list-grid" id="projectsList"></div>
+        </div>
+
+        <!-- CERTIFICATES PANEL -->
+        <div class="panel" id="certificates-panel">
+            <div class="form-card">
+                <h3 id="certFormTitle"><i class="fas fa-plus"></i> إضافة شهادة جديدة</h3>
+                <p class="status-msg" id="certStatus"></p>
+                <input type="text" id="certTitle" placeholder="اسم الشهادة">
+                <input type="text" id="certIssuer" placeholder="جهة الإصدار">
+                <input type="text" id="certLink" placeholder="رابط التحقق (اختياري)">
+                <input type="file" id="certImage" accept="image/*">
+                <div class="progress-wrap" id="certProgressWrap">
+                    <div class="progress-bar" id="certProgressBar"></div>
+                </div>
+                <input type="hidden" id="certEditId">
+                <button class="submit-btn" id="certSubmitBtn">إضافة الشهادة</button>
+            </div>
+            <div class="list-grid" id="certificatesList"></div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
